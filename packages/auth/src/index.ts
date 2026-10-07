@@ -16,8 +16,8 @@ export const auth = getAuth(app)
 export type AuthProviderName = 'google' | 'apple' | 'facebook'
 export function signIn(provider: AuthProviderName) {
   const providers = { google: new GoogleAuthProvider(), apple: new OAuthProvider('apple.com'), facebook: new FacebookAuthProvider() }
-  const mobileAppleBrowser = typeof navigator !== 'undefined' && (/iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
-  if (mobileAppleBrowser) return signInWithRedirect(auth, providers[provider])
+  const mobileBrowser = typeof navigator !== 'undefined' && (/Android|iPad|iPhone|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+  if (mobileBrowser) return signInWithRedirect(auth, providers[provider])
   return signInWithPopup(auth, providers[provider])
 }
 export const signOut = () => firebaseSignOut(auth)
