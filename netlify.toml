@@ -1,0 +1,8 @@
+[build]
+command = "pnpm --filter @bike-tools/tension build"
+publish = "apps/tension/dist"
+functions = "apps/tension/netlify/functions"
+
+[dev]
+command = "pnpm --filter @bike-tools/tension dev"
+targetPort = 5173

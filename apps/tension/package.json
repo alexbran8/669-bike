@@ -1,5 +1,5 @@
 {
-  "name": "@bike-tools/tension", "version": "0.1.0", "private": true, "type": "module",
+  "name": "@bike-tools/tension", "version": "0.1.0", "private": true,
   "scripts": { "dev": "vite", "build": "vite build", "typecheck": "tsc --noEmit", "test": "vitest run --passWithNoTests", "lint": "tsc --noEmit" },
   "dependencies": { "@bike-tools/auth": "workspace:*", "@bike-tools/bike-core": "workspace:*", "@bike-tools/db": "workspace:*", "@netlify/functions": "^4.2.5", "react": "^19.2.0", "react-dom": "^19.2.0", "zod": "^4.1.11" },
   "devDependencies": { "@types/node": "^24.5.2", "@types/react": "^19.2.2", "@types/react-dom": "^19.2.2", "@vitejs/plugin-react": "^5.0.4", "vite": "^7.1.7", "vitest": "^3.2.4" }

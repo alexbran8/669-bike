@@ -16,7 +16,7 @@ A privacy-minded monorepo for small bike workshop applications. The first app is
 2. Copy `apps/tension/.env.example` to `apps/tension/.env` and fill in Firebase and Supabase values.
 3. Apply the SQL migration to an EU-region Supabase project.
 4. Enable Google, Apple, and Facebook providers in Firebase Authentication.
-5. Run `pnpm --filter @bike-tools/tension dev` for the frontend, or `netlify dev` from `apps/tension` to exercise Functions locally.
+5. Run `pnpm --filter @bike-tools/tension dev` for the frontend only, or `npx netlify-cli dev --filter @bike-tools/tension` from the repository root to exercise the app and Functions together.
 
 The Firebase web configuration is public by design. `FIREBASE_SERVICE_ACCOUNT_JSON` and `SUPABASE_SERVICE_ROLE_KEY` are server-only and must be configured in Netlify, never with a `VITE_` prefix.
 

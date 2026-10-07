@@ -1,3 +1,0 @@
-# Production SPA fallback. Keeping this in Vite's public output prevents
-# Netlify Dev from rewriting /@vite/client and /@react-refresh to index.html.
-/* /index.html 200

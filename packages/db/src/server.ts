@@ -4,14 +4,21 @@ import { createClient } from '@supabase/supabase-js'
 import type { HandlerEvent } from '@netlify/functions'
 
 function firebaseAdmin() {
-  const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_JSON ?? '{}')
-  const app = getApps()[0] ?? initializeApp({ credential: cert(serviceAccount) })
-  return getAuth(app)
+  const raw = process.env.FIREBASE_SERVICE_ACCOUNT_JSON
+  if (!raw) throw Object.assign(new Error('Firebase Admin is not configured'), { statusCode: 500 })
+  try {
+    const serviceAccount = JSON.parse(raw)
+    const app = getApps()[0] ?? initializeApp({ credential: cert(serviceAccount) })
+    return getAuth(app)
+  } catch {
+    throw Object.assign(new Error('Firebase Admin service account JSON is invalid'), { statusCode: 500 })
+  }
 }
 export async function requireUid(event: HandlerEvent) {
   const match = event.headers.authorization?.match(/^Bearer (.+)$/)
   if (!match?.[1]) throw Object.assign(new Error('Authentication required'), { statusCode: 401 })
-  try { return (await firebaseAdmin().verifyIdToken(match[1])).uid }
+  const admin = firebaseAdmin()
+  try { return (await admin.verifyIdToken(match[1])).uid }
   catch { throw Object.assign(new Error('Invalid or expired authentication token'), { statusCode: 401 }) }
 }
 export function database() {
