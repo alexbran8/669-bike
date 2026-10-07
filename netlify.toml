@@ -6,3 +6,11 @@ functions = "apps/tension/netlify/functions"
 [dev]
 command = "pnpm --filter @bike-tools/tension dev"
 targetPort = 5173
+
+# Keep Firebase's OAuth helper on the same origin as the application. This is
+# required for Safari and other browsers that partition third-party storage.
+[[redirects]]
+from = "/__/auth/*"
+to = "https://bike-bd970.firebaseapp.com/__/auth/:splat"
+status = 200
+force = true
