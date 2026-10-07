@@ -132,3 +132,23 @@ input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{out
 .history-summary b{color:#b64b1d}
 .good-status{color:#343434;background:#eceae6}
 .check-status{color:#a83f16;background:#fff0e8}
+
+.history-actions{display:flex;align-items:stretch;background:white}
+.history-actions .history-summary{flex:1;width:auto}
+.share-button{margin:12px;padding:0 18px;border:1px solid #c9c5c0;color:#292929;background:white;font-size:11px;font-weight:800}
+.share-button:hover{color:white;border-color:#f26a2b;background:#f26a2b}
+.share-button:disabled{opacity:.55}
+.share-message{padding:10px 13px;color:#7a391d;background:#fff0e8;border-left:3px solid #f26a2b;font-size:11px}
+.header-link{align-self:center;padding:9px 12px;color:#d6d2cc;font-size:12px;text-decoration:none}
+.header-link:hover{color:white;background:#292929}
+.shared-page{width:min(1000px,calc(100% - 40px));margin:0 auto;padding-top:42px}
+.loading-panel{padding:40px;border:1px solid var(--line);background:white;text-align:center}
+@media(max-width:600px){.history-actions{align-items:center}.share-button{align-self:stretch;margin:9px;padding-inline:12px}.shared-page{width:calc(100% - 28px);padding:24px 0 60px}}
+
+aside>.add-wheel-button{align-items:center;margin-bottom:14px;padding:10px 12px;border:1px solid #56514c;color:white;background:#2b2927}
+aside>.add-wheel-button:hover{border-color:#f26a2b;background:#f26a2b}
+.add-wheel-button>strong{display:grid;place-items:center;width:23px;height:23px;color:#111;background:#f26a2b;font-size:17px}
+.add-wheel-button:hover>strong{background:white}
+.add-wheel-button>span{display:block;font-weight:800}
+.mobile-add-wheel{display:none}
+@media(max-width:800px){header nav .mobile-add-wheel{display:block}}
