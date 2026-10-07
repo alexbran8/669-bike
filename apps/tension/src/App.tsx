@@ -86,6 +86,7 @@ function SessionHistory({ wheel, sessions }: { wheel: Wheel; sessions: TensionSe
 }
 
 function App() {
+  const exportEnabled=import.meta.env.VITE_ENABLE_DATA_EXPORT==='true'
   const [user,setUser]=useState<User|null|undefined>(undefined); const [wheels,setWheels]=useState<Wheel[]>([]); const [active,setActive]=useState<string>(''); const [history,setHistory]=useState<TensionSession[]>([]); const [adding,setAdding]=useState(false); const [error,setError]=useState('')
   useEffect(()=>observeAuth(setUser),[])
   const load=async()=>{if(!user)return;try{const token=await getIdToken();const data=await apiRequest<Wheel[]>('wheels',token);if(!Array.isArray(data))throw new Error('The wheels API returned an invalid response');setWheels(data);setActive(current=>current||data[0]?.id||'')}catch(e){setWheels([]);setError(e instanceof Error?e.message:'Could not load wheels')}}
@@ -99,7 +100,7 @@ function App() {
   const exportData=async()=>{const token=await getIdToken();const data=await apiRequest('export-data',token);const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='spoke-bench-export.json';a.click();URL.revokeObjectURL(url)}
   const removeAccount=async()=>{if(!confirm('Permanently delete all wheel data and your account? This cannot be undone.'))return;try{const token=await getIdToken(true);await apiRequest('account',token,{method:'DELETE'});await deleteLocalAuthUser()}catch(e){setError(e instanceof Error?e.message:'Deletion failed. Sign in again and retry.')}}
   return <div className="app">
-    <header><div className="brand"><span>SB</span> SPOKE BENCH</div><nav><button onClick={()=>setAdding(true)}>+ Add wheel</button><button onClick={exportData}>Export data</button><button onClick={()=>signOut()}>Sign out</button></nav></header>
+    <header><div className="brand"><span>SB</span> SPOKE BENCH</div><nav><button onClick={()=>setAdding(true)}>+ Add wheel</button>{exportEnabled&&<button onClick={exportData}>Export data</button>}<button onClick={()=>signOut()}>Sign out</button></nav></header>
     <div className="layout"><aside><p className="eyebrow">MY WHEELS</p>{wheels.map(w=><button key={w.id} className={active===w.id?'active':''} onClick={()=>setActive(w.id)}><span className="mini-wheel">◎</span><span><strong>{w.name||'Untitled wheel'}</strong><small>{w.position} · {w.spokeCount} spokes</small></span></button>)}<div className="account"><button onClick={removeAccount}>Delete account</button><small>Deletes all saved data and Firebase identity.</small></div></aside>
       <main><div className="page-head"><div><p className="eyebrow">WHEEL WORKSHOP / TENSION</p><h1>Tension manager</h1></div>{current&&<div className="wheel-meta"><span>{current.rim||'No rim'}</span><span>{current.hub||'No hub'}</span><span>{current.spokeCount} spokes</span></div>}</div>{error&&<p className="error" role="alert">{error}</p>}{adding||!wheels.length?<WheelForm onSave={create} onCancel={wheels.length?()=>setAdding(false):undefined}/>:current&&<><SessionEditor wheel={current} history={history} onSaved={loadHistory}/><SessionHistory wheel={current} sessions={history}/></>}</main>
     </div>
