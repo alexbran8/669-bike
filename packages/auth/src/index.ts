@@ -1,5 +1,5 @@
 import { getApps, initializeApp } from 'firebase/app'
-import { FacebookAuthProvider, GoogleAuthProvider, OAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signInWithRedirect, signOut as firebaseSignOut, type User } from 'firebase/auth'
+import { GoogleAuthProvider, getAuth, onAuthStateChanged, signInWithPopup, signInWithRedirect, signOut as firebaseSignOut, type User } from 'firebase/auth'
 
 const config = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -13,9 +13,14 @@ const config = {
 }
 const app = getApps()[0] ?? initializeApp(config)
 export const auth = getAuth(app)
-export type AuthProviderName = 'google' | 'apple' | 'facebook'
+export type AuthProviderName = 'google'
 export function signIn(provider: AuthProviderName) {
-  const providers = { google: new GoogleAuthProvider(), apple: new OAuthProvider('apple.com'), facebook: new FacebookAuthProvider() }
+  const providers = {
+    google: new GoogleAuthProvider(),
+    // Re-enable when provider credentials and OAuth callbacks are configured:
+    // apple: new OAuthProvider('apple.com'),
+    // facebook: new FacebookAuthProvider(),
+  }
   const mobileBrowser = typeof navigator !== 'undefined' && (/Android|iPad|iPhone|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
   if (mobileBrowser) return signInWithRedirect(auth, providers[provider])
   return signInWithPopup(auth, providers[provider])
