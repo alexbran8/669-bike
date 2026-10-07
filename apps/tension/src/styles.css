@@ -91,3 +91,5 @@
 .saved-readings th:first-child,.saved-readings td:first-child{width:80px;text-align:center;color:#829094}
 .saved-readings td small{margin-left:8px;color:#929da0}
 @media(max-width:600px){.saved-stats{grid-template-columns:1fr}.saved-readings td small{display:none}.history-summary{padding-inline:13px}.session-detail{padding:12px}}
+
+.analysis-grid{grid-template-columns:minmax(0,1fr)}
