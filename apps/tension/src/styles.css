@@ -93,3 +93,42 @@
 @media(max-width:600px){.saved-stats{grid-template-columns:1fr}.saved-readings td small{display:none}.history-summary{padding-inline:13px}.session-detail{padding:12px}}
 
 .analysis-grid{grid-template-columns:minmax(0,1fr)}
+
+/* Black + orange workshop theme */
+:root{--ink:#171717;--blue:#f26a2b;--green:#292929;--orange:#f26a2b;--line:#d9d6d2;background:#f1f0ed;color:#292929}
+body{background:#f1f0ed}
+.app{background:#f1f0ed}
+header{background:#111;border-bottom-color:#f26a2b}
+header nav button{color:#d6d2cc}
+header nav button:hover{color:white;background:#292929}
+aside{background:#1c1c1c}
+aside>button:hover,aside>button.active{background:#30302f}
+aside>button.active{box-shadow:inset 3px 0 #f26a2b}
+.mini-wheel{color:#f28a59}
+.account{border-top-color:#3e3c39}
+.account button{color:#f28a59}
+.signin{background:#111}
+.signin-copy{background:radial-gradient(circle at 70% 40%,#57301e 0,transparent 32%),linear-gradient(135deg,#101010,#24211f)}
+.signin-copy .eyebrow,.signin-copy h1 em{color:#f28a59}
+.signin-card .wheel-logo{color:#f26a2b}
+.signin-card button:hover{border-color:#f26a2b;background:#fff7f2}
+.primary{background:#f26a2b}
+input:focus,select:focus,textarea:focus,button:focus-visible,a:focus-visible{outline-color:#f28a59}
+.radar-area.left{fill:#292929;stroke:#292929}
+.radar-area.right{fill:#f26a2b;stroke:#f26a2b}
+.radar-point.left{fill:#292929}
+.radar-point.right{fill:#f26a2b}
+.left-key,.side-pill.left::before{background:#292929}
+.right-key,.side-pill.right::before,.side-pill::before{background:#f26a2b}
+.diagram .spoke.left circle:not(.spoke-hit){stroke:#292929}
+.diagram .spoke.right circle:not(.spoke-hit){stroke:#f26a2b}
+.diagram .spoke.selected circle:not(.spoke-hit){fill:#f26a2b;stroke:#f26a2b}
+.axle{fill:#f26a2b}
+.side-entry-cell.left{border-left-color:#292929}
+.side-entry-cell.right{border-left-color:#f26a2b}
+.side-entry-cell.active-cell{background:#fff2e9!important;box-shadow:inset 0 0 0 1px #e5a27f}
+.spoke-entry .active-row td{background:#fff2e9}
+.spoke-entry .active-row td:first-child{box-shadow:inset 3px 0 #f26a2b}
+.history-summary b{color:#b64b1d}
+.good-status{color:#343434;background:#eceae6}
+.check-status{color:#a83f16;background:#fff0e8}
